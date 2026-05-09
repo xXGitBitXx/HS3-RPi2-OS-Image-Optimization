@@ -436,3 +436,17 @@ SystemMaxUse=10M
 RuntimeMaxUse=10M
 SystemMaxFileSize=2M
 ```
+
+---
+
+##  Final Verification
+
+Once booted
+
+run: 
+
+```bash
+netstat -tulpn | grep 2001
+```
+
+If you see ser2net listening on that port, the bridge is active.
