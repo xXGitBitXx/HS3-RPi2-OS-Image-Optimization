@@ -47,7 +47,7 @@ sudo apt-get autoremove
 
 ## Kernel & Module Slimming
 
-Run:
+execute:
 
 ```bash
 uname -r
@@ -360,7 +360,7 @@ sudo resize2fs /dev/sdX#
 
 ### Verify UUID
 
-Run:
+execute:
 
 ```bash
 blkid /dev/sdX#
@@ -439,14 +439,33 @@ SystemMaxFileSize=2M
 
 ---
 
-##  Final Verification
+# Phase 5: Verification
+
+### **Goal:** Confirm the system is running within the 1GB physical constraint with Zero-Swap.
 
 Once booted
 
-run: 
+execute: 
 
 ```bash
 netstat -tulpn | grep 2001
 ```
 
 If you see ser2net listening on that port, the bridge is active.
+
+execute:
+
+```bash
+`df -h`, `lsblk`, and `free -h` 
+```
+
+to verify the filesystem footprint and memory management.
+
+## [Terminal Verification] ##
+
+**Key Metrics to confirm:**
+* **Filesystem Size:** (fits on 1GB USB).
+* **Swap:** 0B (confirmed disabled to preserve flash memory).
+* **Memory Usage:** Minimal footprint.
+
+<img width="809" height="400" alt="image" src="https://github.com/user-attachments/assets/f17d1d1f-1fb8-4f8e-8941-4e010274f483" />
