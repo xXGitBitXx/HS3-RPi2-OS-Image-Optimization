@@ -1,0 +1,50 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+sleep 5
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+/usr/local/bin/gpio -g mode 2 out
+/usr/local/bin/gpio -g mode 3 out
+/usr/local/bin/gpio -g mode 4 out
+/usr/local/bin/gpio -g write 3 1
+/usr/local/bin/gpio -g write 4 1
+/usr/local/bin/gpio -g write 2 0
+
+/usr/local/HomeSeer/led.sh yellow
+
+/var/www/Main/checkkb
+
+modprobe ftdi_sio vendor=0x0403 product=0xc07f
+printf "Setting audio output to analog...\n"
+amixer cset numid=3 1
+
+/usr/local/HomeSeer/led.sh blue
+#sudo /usr/local/HomeSeer/autostart_hs &
+echo "HomeSeer is starting..."
+#sudo /usr/local/HomeSeer/register_with_find.sh &
+/usr/local/bin/gpio -g write 2 1
+/usr/local/bin/gpio -g write 3 1
+/usr/local/bin/gpio -g write 4 0
+
+sudo sh /var/www/Main/uzb.sh &
+/usr/local/sbin/ser2net -c /etc/ser2net.conf -n > /dev/null 2>&1 &
+/usr/local/HomeSeer/register_with_find.sh > /dev/null 2>&1 &
+
+echo ""
+
+exit 0
