@@ -208,11 +208,7 @@ Modify:
 /etc/rc.local
 ```
 
-Add the following above:
-
-```text
-printf "Setting audio output to analog...\n"
-```
+Add the following above *printf "Setting audio output to analog...\n"*:
 
 ```bash
 modprobe ftdi_sio vendor=0x0403 product=0xc07f
