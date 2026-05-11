@@ -2,6 +2,7 @@
 ## Stripped Raspbian 9 OS for Z-Net Interface
 
 > **Note:** This procedure was engineered because official Raspbian 8 recovery images are no longer provided, requiring custom optimization for legacy Z-Net-only hardware.
+> For rapid deployment, the necessary files within each folder of this repository can be copied directly to their intended system directories.
 
 ---
 
